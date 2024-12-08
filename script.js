@@ -83,11 +83,26 @@ class ExpandingTree extends HTMLElement {
                     padding: 10px;
 
                     details.expanding-tree-node {
+
+                        details.expanding-tree-node::before {
+                            content: '';
+                            position: absolute;
+                            top: 5px;
+                            left: 10px;
+                            bottom: 0;
+                            width: 2px;
+                            border-left: 2px dashed #ccc;
+                        }
+
                         details.expanding-tree-node {
-                            padding-left: 10px;
+                            position: relative;
+                            padding-left: 20px;
+                            margin-top: 10px;
                         }
 
                         summary {
+                            padding: 5px;
+                            border-radius: 5px;
                             width: 100%;
                             list-style: none;
                             border: 1px solid #ccc;
@@ -96,6 +111,7 @@ class ExpandingTree extends HTMLElement {
                         
                         summary:hover {
                             cursor: pointer;
+                            background-color: #f0f0f0;
                         }
 
                         div.expanding-tree-node-items {
@@ -104,11 +120,51 @@ class ExpandingTree extends HTMLElement {
                             justify-content: space-between;
 
                             div.expanding-tree-item-buttons {
-                                margin: 5px;
+                                margin: 3px;
+
+                                button {
+                                    background: none;
+                                    border: none;
+                                    color: #00000085;
+                                    border-radius: 5px;
+                                    transition: transform 0.1s ease-in-out;
+                                }
+
+                                button:hover {
+                                    cursor: pointer;
+                                    color: black;
+                                    transform: scale(1.2);
+                                }
+
+                                button:active {
+                                    transform: scale(1.0);
+                                }
                             }
                         }
                     }
                 }
+
+                .expanding-tree[data-bs-theme="dark"] {
+                    details.expanding-tree-node {
+                        summary:hover {
+                            background-color: #333;
+                        }
+
+                        div.expanding-tree-node-items {
+                            div.expanding-tree-item-buttons {
+                                button {
+                                    color: #959595;
+                                }
+
+                                button:hover {
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
             </style>
 
             <div class="expanding-tree" data-bs-theme="light"></div>
@@ -148,9 +204,9 @@ class ExpandingTree extends HTMLElement {
                     <div class="expanding-tree-node-items">
                         <span class="expanding-tree-item-label">${node[this.config.labelKey]}</span>
                         <div class="expanding-tree-item-buttons">
-                            <button type="button" class="btn btn-sm btn-secondary"><i class="bi bi-plus-square"></i></button>
-                            <button type="button" class="btn btn-sm btn-secondary"><i class="bi bi-pencil-square"></i></button>
-                            <button type="button" class="btn btn-sm btn-secondary"><i class="bi bi-trash"></i></button>  
+                            <button type="button"><i class="bi bi-plus-square"></i></button>
+                            <button type="button"><i class="bi bi-pencil-square"></i></button>
+                            <button type="button"><i class="bi bi-trash"></i></button>  
                         </div>
                     </div>
                 </summary>
